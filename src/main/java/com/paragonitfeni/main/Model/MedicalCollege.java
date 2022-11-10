@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
@@ -20,7 +21,28 @@ public class MedicalCollege {
     @Column(name = "location", nullable = false)
     private String location;
 
-    public long getId() {
+
+        private Timestamp createdAt;
+        private Timestamp updateAt;
+
+        public Timestamp getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Timestamp createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public Timestamp getUpdateAt() {
+            return updateAt;
+        }
+
+        public void setUpdateAt(Timestamp updateAt) {
+            this.updateAt = updateAt;
+        }
+
+
+        public long getId() {
         return id;
     }
 

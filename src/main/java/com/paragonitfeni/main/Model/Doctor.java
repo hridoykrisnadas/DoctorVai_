@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -31,9 +33,29 @@ public class Doctor {
     @JoinColumn(name = "fk_medical_college_id")
     private MedicalCollege medicalCollege;
 
-    /*@ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "doctor_degree")
-    private List<Degree> degree;*/
+    @JoinColumn(name = "doctor_id", referencedColumnName = "degree_id")
+    private List<Degree> degree;
+
+    private Timestamp createdAt;
+    private Timestamp updateAt;
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Timestamp updateAt) {
+        this.updateAt = updateAt;
+    }
 
     public long getId() {
         return id;
@@ -91,11 +113,11 @@ public class Doctor {
         this.medicalCollege = medicalCollege;
     }
 
-    /*public List<Degree> getDegree() {
+    public List<Degree> getDegree() {
         return degree;
     }
 
     public void setDegree(List<Degree> degree) {
         this.degree = degree;
-    }*/
+    }
 }
