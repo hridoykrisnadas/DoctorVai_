@@ -54,6 +54,7 @@ public class Doctor {
     }
 
     public void setUpdateAt(Timestamp updateAt) {
+
         this.updateAt = updateAt;
     }
 

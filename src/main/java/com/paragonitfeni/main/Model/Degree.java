@@ -23,6 +23,12 @@ public class Degree {
     private Timestamp createdAt;
     private Timestamp updateAt;
 
+    public Degree(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public long getId() {
         return id;
     }
@@ -54,5 +60,7 @@ public class Degree {
     public void setUpdateAt(Timestamp updateAt) {
         this.updateAt = updateAt;
     }
+
+
 }
 
