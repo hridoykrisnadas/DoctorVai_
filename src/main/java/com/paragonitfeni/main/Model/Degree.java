@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
@@ -20,8 +19,8 @@ public class Degree {
     @Column(name = "name", nullable = false)
     private String name;
 
-    private Timestamp createdAt;
-    private Timestamp updateAt;
+    private String createdAt;
+    private String updateAt;
 
     public Degree(long id, String name) {
         this.id = id;
@@ -45,19 +44,19 @@ public class Degree {
         this.name = name;
     }
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 

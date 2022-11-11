@@ -46,12 +46,14 @@ public class DoctorController {
         MedicalCollege medicalCollege = medicalCollegeRepo.findById(medicalCollegeId).get();
         doctor.setMedicalCollege(medicalCollege);
         doctor.setDegree(degreeList);
-        doctor.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        doctor.setCreatedAt(new Timestamp(System.currentTimeMillis()).toString());
         return new ResponseEntity<>(doctorService.saveDoctor(doctor), HttpStatus.CREATED);
     }
 
     @PutMapping("update")
     public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
+        Doctor doctor1 = doctorService.DoctorDetails(doctor.getId());
+
         long medicalCollegeId = doctor.getMedicalCollege().getId();
         List<Degree> degreeList = new ArrayList<>();
         for (Degree degree : doctor.getDegree()) {
@@ -62,7 +64,8 @@ public class DoctorController {
         MedicalCollege medicalCollege = medicalCollegeRepo.findById(medicalCollegeId).get();
         doctor.setMedicalCollege(medicalCollege);
         doctor.setDegree(degreeList);
-        doctor.setUpdateAt(new Timestamp(System.currentTimeMillis()));
+        doctor.setUpdateAt(new Timestamp(System.currentTimeMillis()).toString());
+        doctor.setCreatedAt(doctor1.getCreatedAt());
         return new ResponseEntity<>(doctorService.saveDoctor(doctor), HttpStatus.ACCEPTED);
     }
 

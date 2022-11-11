@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -38,22 +37,22 @@ public class Doctor {
     @JoinColumn(name = "doctor_id", referencedColumnName = "degree_id")
     private List<Degree> degree;
 
-    private Timestamp createdAt;
-    private Timestamp updateAt;
+    private String createdAt;
+    private String updateAt;
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
+    public void setUpdateAt(String updateAt) {
 
         this.updateAt = updateAt;
     }

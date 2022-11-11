@@ -24,7 +24,7 @@ public class DegreeController {
 
     @PostMapping("save")
     public ResponseEntity<Degree> saveDegree(@RequestBody Degree degree){
-        degree.setCreatedAt(Timestamp.from(Calendar.getInstance().getTime().toInstant()));
+        degree.setCreatedAt(new Timestamp(System.currentTimeMillis()).toString());
         return new ResponseEntity<>(degreeService.saveDegree(degree), HttpStatus.CREATED);
     }
 
