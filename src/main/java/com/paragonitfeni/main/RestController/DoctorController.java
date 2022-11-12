@@ -4,6 +4,7 @@ import com.paragonitfeni.main.Model.Degree;
 import com.paragonitfeni.main.Model.Doctor;
 import com.paragonitfeni.main.Model.MedicalCollege;
 import com.paragonitfeni.main.Repository.DegreeRepo;
+import com.paragonitfeni.main.Repository.DoctorRepo;
 import com.paragonitfeni.main.Repository.MedicalCollegeRepo;
 import com.paragonitfeni.main.Service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
+    @Autowired
+    DoctorRepo doctorRepo;
     @Autowired
     MedicalCollegeRepo medicalCollegeRepo;
     @Autowired
@@ -75,14 +78,26 @@ public class DoctorController {
     public ResponseEntity<List<Doctor>> getAllDegree() {
         return new ResponseEntity<>(doctorService.getAllDoctor(), HttpStatus.OK);
     }
-        @DeleteMapping("delete/{id}")
-        public ResponseEntity<String> deleteDegree(@PathVariable long id) {
 
-            if (doctorService.deleteDoctor(id)==1){
-                return new ResponseEntity<>("Delete Success", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Not Found!!!", HttpStatus.NOT_FOUND);
-            }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteDegree(@PathVariable long id) {
 
+        if (doctorService.deleteDoctor(id) == 1) {
+            return new ResponseEntity<>("Delete Success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Found!!!", HttpStatus.NOT_FOUND);
         }
+
+    }
+
+    @PostMapping("add-doctor-degree/{doctor_id}/{degree_id}")
+    public ResponseEntity<Doctor> setDoctorDegree(@PathVariable long doctor_id, @PathVariable long degree_id) {
+        Doctor doctor = doctorService.doctorDetails(doctor_id);
+        List<Degree> degreeList = new ArrayList<>();
+
+        degreeList.add(degreeRepo.findById(degree_id).get());
+        doctor.setDegree(degreeList);
+        doctor.setUpdateAt(new Timestamp(System.currentTimeMillis()).toString());
+        return new ResponseEntity<>(doctorService.saveDoctor(doctor), HttpStatus.OK);
+    }
 }

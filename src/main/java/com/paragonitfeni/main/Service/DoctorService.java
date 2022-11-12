@@ -12,4 +12,5 @@ public interface DoctorService {
     List<Doctor> getAllDoctor();
 
     int deleteDoctor(long id);
+
 }

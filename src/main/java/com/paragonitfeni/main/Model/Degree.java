@@ -27,6 +27,10 @@ public class Degree {
         this.name = name;
     }
 
+    public Degree(long degree_id) {
+        this.id = degree_id;
+    }
+
 
     public long getId() {
         return id;
