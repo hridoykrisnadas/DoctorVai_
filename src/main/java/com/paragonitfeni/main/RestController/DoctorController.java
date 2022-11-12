@@ -11,11 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -37,22 +34,22 @@ public class DoctorController {
     @PostMapping("save")
     public ResponseEntity<Doctor> saveDoctor(@RequestBody Doctor doctor) {
         long medicalCollegeId = doctor.getMedicalCollege().getId();
-        List<Degree> degreeList = new ArrayList<>();
+       /* List<Degree> degreeList = new ArrayList<>();
         for (Degree degree : doctor.getDegree()) {
             Degree degree1 = degreeRepo.findById(degree.getId()).get();
-            degreeList.add(new Degree(degree1.getId(), degree1.getName()));
+            degreeList.add(degree1);
         }
-
+*/
         MedicalCollege medicalCollege = medicalCollegeRepo.findById(medicalCollegeId).get();
         doctor.setMedicalCollege(medicalCollege);
-        doctor.setDegree(degreeList);
+//        doctor.setDegree(degreeList);
         doctor.setCreatedAt(new Timestamp(System.currentTimeMillis()).toString());
         return new ResponseEntity<>(doctorService.saveDoctor(doctor), HttpStatus.CREATED);
     }
 
-    @PutMapping("update")
-    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
-        Doctor doctor1 = doctorService.DoctorDetails(doctor.getId());
+    @PutMapping("update/{id}")
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable long id, @RequestBody Doctor doctor) {
+        Doctor doctor1 = doctorService.doctorDetails(id);
 
         long medicalCollegeId = doctor.getMedicalCollege().getId();
         List<Degree> degreeList = new ArrayList<>();
@@ -71,11 +68,21 @@ public class DoctorController {
 
     @GetMapping("doctor-details/{id}")
     public ResponseEntity<Doctor> getSingleDegree(@PathVariable int id) {
-        return new ResponseEntity<>(doctorService.DoctorDetails(id), HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.doctorDetails(id), HttpStatus.OK);
     }
 
     @GetMapping("all-doctor")
     public ResponseEntity<List<Doctor>> getAllDegree() {
         return new ResponseEntity<>(doctorService.getAllDoctor(), HttpStatus.OK);
     }
+        @DeleteMapping("delete/{id}")
+        public ResponseEntity<String> deleteDegree(@PathVariable long id) {
+
+            if (doctorService.deleteDoctor(id)==1){
+                return new ResponseEntity<>("Delete Success", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Not Found!!!", HttpStatus.NOT_FOUND);
+            }
+
+        }
 }

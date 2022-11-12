@@ -30,7 +30,19 @@ public class DoctorServiceIMPL implements DoctorService {
     }
 
     @Override
-    public Doctor DoctorDetails(long id) {
+    public int deleteDoctor(long id) {
+        Optional<Doctor> doctor = doctorRepo.findById(id);
+        if (doctor.isPresent()){
+            doctorRepo.deleteById(id);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    @Override
+    public Doctor doctorDetails(long id) {
         Optional<Doctor> doctor = doctorRepo.findById(id);
         if (doctor.isPresent()) {
             return doctor.get();
