@@ -7,6 +7,7 @@ import com.paragonitfeni.main.Repository.DegreeRepo;
 import com.paragonitfeni.main.Repository.DoctorRepo;
 import com.paragonitfeni.main.Repository.MedicalCollegeRepo;
 import com.paragonitfeni.main.Service.DoctorService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,15 +38,9 @@ public class DoctorController {
     @PostMapping("save")
     public ResponseEntity<Doctor> saveDoctor(@RequestBody Doctor doctor) {
         long medicalCollegeId = doctor.getMedicalCollege().getId();
-       /* List<Degree> degreeList = new ArrayList<>();
-        for (Degree degree : doctor.getDegree()) {
-            Degree degree1 = degreeRepo.findById(degree.getId()).get();
-            degreeList.add(degree1);
-        }
-*/
+
         MedicalCollege medicalCollege = medicalCollegeRepo.findById(medicalCollegeId).get();
         doctor.setMedicalCollege(medicalCollege);
-//        doctor.setDegree(degreeList);
         doctor.setCreatedAt(new Timestamp(System.currentTimeMillis()).toString());
         return new ResponseEntity<>(doctorService.saveDoctor(doctor), HttpStatus.CREATED);
     }

@@ -13,4 +13,5 @@ public interface DoctorService {
 
     int deleteDoctor(long id);
 
+
 }

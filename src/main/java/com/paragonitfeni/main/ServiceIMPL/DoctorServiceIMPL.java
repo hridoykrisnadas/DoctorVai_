@@ -26,7 +26,7 @@ public class DoctorServiceIMPL implements DoctorService {
 
     @Override
     public List<Doctor> getAllDoctor() {
-        return doctorRepo.findAll();
+        return doctorRepo.getAllDoctor();
     }
 
     @Override
@@ -43,9 +43,9 @@ public class DoctorServiceIMPL implements DoctorService {
 
     @Override
     public Doctor doctorDetails(long id) {
-        Optional<Doctor> doctor = doctorRepo.findById(id);
-        if (doctor.isPresent()) {
-            return doctor.get();
+        Doctor doctor = doctorRepo.getDoctorById(id);
+        if (doctor != null) {
+            return doctor;
         } else {
             throw new NotFoundException("Doctor", "Id", id);
         }
