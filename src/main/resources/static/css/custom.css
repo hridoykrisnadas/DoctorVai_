@@ -6,6 +6,9 @@
 .sidebar-vh{
 	height: 100vh;
 }
+.nav-hw{
+    width : 100wh;
+}
 .profile-image{
 	height: auto;
 	width: 100px;
@@ -13,6 +16,9 @@
 .bg-navy{
 	background-color: rgb(2, 25, 39);
 }
+.bg-navy-dark{
+ 	background-color: rgb(0, 90, 145);
+ }
 .nav-pills {
     --bs-nav-pills-link-active-bg: #053a56 !important;
 }
