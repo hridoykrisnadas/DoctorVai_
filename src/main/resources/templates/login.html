@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simple Quize Apps</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <!--Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
+</head>
+<body>
+
+<section class="min-height-100 header_image_quize container-fluid">
+    <div class="card radius-5 position-absolute top-50 start-50 translate-middle ">
+        <div class="p-5">
+            <form class="row" action="login-dashboard" method="POST">
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name= "email" id="inputEmail">
+                        <p th:if="${emailWarning}" th:text="${emailWarning}" class="text-warning fw-bold"></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name = "password" id="inputPassword">
+                        <p th:if="${passWarning}" th:text="${passWarning}" class="text-warning fw-bold"></p>
+                    </div>
+                </div>
+                <div class="row p-5">
+                    <button type="submit" class="btn row btn-primary p-2 mb-5 mx-5">Sign in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/ja<javascript" th:src="@{/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" th:src="@{js/jquery-3.6.0.min.js}" ></script>
+<script type="text/javascript" th:src="@{/js/fontawesome.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/all.min.js}"></script>
+</body>
+</html>

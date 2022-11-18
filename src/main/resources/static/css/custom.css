@@ -9,6 +9,9 @@
 .nav-hw{
     width : 100wh;
 }
+.min-height-100{
+    min-height: 100vh;
+}
 .profile-image{
 	height: auto;
 	width: 100px;
@@ -21,4 +24,7 @@
  }
 .nav-pills {
     --bs-nav-pills-link-active-bg: #053a56 !important;
+}
+.custom-card-bg{
+    background-color: #053a56 !important;
 }
